@@ -35,6 +35,8 @@ header
 
 .text{ margin-right: 125px; cursor: pointer;}
 
+.header-text { word-spacing: 12.5px; } .header-text a{ word-spacing: normal;}
+
 .dropdown
 {
   display: flex;
@@ -59,6 +61,7 @@ header
   text-decoration: none;
   display: block;
   white-space: 25px;
+  word-spacing: normal;
 }
   
 .dropdown-content a:hover { background-color: #f1f1f1; }
@@ -70,7 +73,6 @@ header
 {
     color: white;
     text-decoration: none;
-
 }
 
 .link1
