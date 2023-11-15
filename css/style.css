@@ -1,0 +1,130 @@
+header
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.button 
+{
+  color: #fff;
+  background: dodgerblue;
+  padding: 15px 46px;
+  text-transform: uppercase;
+  display: flex;
+  margin-top: 50px;
+  z-index: 3;
+}
+
+/*
+.logo { width: px; height: px;}
+*/
+
+.top-menu
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: black;
+    text-align: center;
+    height: 50px;
+    width: 100%;
+}
+
+.text{ margin-right: 125px; cursor: pointer;}
+
+.dropdown
+{
+  display: flex;
+  position: relative;
+  display: inline-block;
+}
+  
+.dropdown-content
+{
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+  
+.dropdown-content a 
+{
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  white-space: 25px;
+}
+  
+.dropdown-content a:hover { background-color: #f1f1f1; }
+  
+.dropdown:hover .dropdown-content { display: block; }
+
+
+.links
+{
+    color: white;
+    text-decoration: none;
+
+}
+
+.link1
+{
+    font-size: 14px;
+    
+}
+
+.selected
+{
+    color: blueviolet;
+    text-decoration: underline;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+}
+
+main { flex: 1; }
+
+html, body { height: 100%; }
+  
+.page-wrapper 
+{
+  min-height: 100%;
+  margin-bottom: -50px; /* высота footer */
+}
+  
+.page-wrapper:after
+{
+  content: "";
+  display: block;
+}
+  
+footer, .page-wrapper:after { height: 50px; /* высота footer */ }
+  
+footer
+{
+  position: absolute;
+  left: 0;
+  right:0;
+  bottom: 0%;
+  z-index: 3;
+}
+
+.bottom-menu
+{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+  text-align: center;
+  height: 50px;
+  word-spacing: 290px;
+}

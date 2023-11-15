@@ -1,0 +1,20 @@
+.primary{ margin-top: -50%; }
+.slide
+{
+    position: absolute;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    line-height: 1; 
+}
+
+#popup-menu {
+    position: absolute;
+    margin-top: 50%;
+    z-index: 1;
+}
