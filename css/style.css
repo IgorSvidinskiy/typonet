@@ -75,11 +75,7 @@ header
     text-decoration: none;
 }
 
-.link1
-{
-    font-size: 14px;
-    
-}
+.link1 { font-size: 14px; }
 
 .selected
 {
