@@ -99,7 +99,7 @@ html, body { height: 100%; }
 .page-wrapper 
 {
   min-height: 100%;
-  margin-bottom: -50px; /* высота footer */
+  margin-bottom: -50px; /*высота footer*/
 }
   
 .page-wrapper:after
@@ -115,7 +115,7 @@ footer
   position: absolute;
   left: 0;
   right:0;
-  bottom: 0%;
+  bottom: -30px;
   z-index: 3;
 }
 
