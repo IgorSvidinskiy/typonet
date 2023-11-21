@@ -1,13 +1,23 @@
-const select = document.createElement('select');
-select.classList.add('dropdown');
+// Обернем в функцию
+function init() {
 
-const option1 = document.createElement('option');
-option1.text = 'Очень длинный текст для проверки переноса слов в выпадающем списке';
-
-const option2 = document.createElement('option'); 
-option2.text = 'Еще один вариант';
-
-select.appendChild(option1);
-select.appendChild(option2);
-
-document.addEventListener('DOMContentLoaded', () => { document.body.appendChild(select); })
+    // Проверка на существование body
+    if(!document.body) {
+      console.log('DOM не загружен!');
+      return;
+    }
+  
+    // Добавление логотипа
+    const logo = document.createElement('img');
+    logo.src = 'imgs/logo/1000012685(1)-transformed-u_vlc6LNW-transformed.png';
+    logo.width = '110';
+    logo.height = '50';
+    logo.style.zIndex = '10';
+    logo.style.marginLeft = '2.5%';
+    logo.style.marginTop = '-4px';
+  
+    document.body.insertBefore(logo, document.body.firstChild);  
+  }
+  
+  // Вызов функции после загрузки DOM
+  document.addEventListener('DOMContentLoaded', init);

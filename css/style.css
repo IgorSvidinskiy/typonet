@@ -102,10 +102,11 @@ html, body { height: 100%; }
   margin-bottom: -50px; /*высота footer*/
 }
   
-.page-wrapper:after
+.page-wrapper::after
 {
   content: "";
   display: block;
+  height: 50px;
 }
   
 footer, .page-wrapper:after { height: 50px; /* высота footer */ }
