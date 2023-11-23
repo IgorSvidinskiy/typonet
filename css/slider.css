@@ -1,20 +1,38 @@
-.primary{ margin-top: -50%; }
-.slide
-{
-    position: absolute;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    line-height: 1; 
-}
-
-#popup-menu {
-    position: absolute;
-    margin-top: 50%;
-    z-index: 1;
-}
+.arrow {
+    padding: 0;
+    background: #000;
+    border-radius: 15px;
+    border: 1px solid gray;
+    font-size: 24px;
+    line-height: 24px;
+    color: #444;
+    display: block;
+  }
+  
+  .arrow:focus {
+    outline: none;
+  }
+  
+  .arrow:hover {
+    background: #ccc;
+    cursor: pointer;
+  }
+  
+  ul {
+    height: 130px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+  }
+  
+  ul img {
+    width: 130px;
+    height: 130px;
+    display: block; /* убираем пустое место вокруг картинок */
+  }
+  
+  ul li {
+    display: inline-block; /* убираем пустое место между элементами списка */
+  }
