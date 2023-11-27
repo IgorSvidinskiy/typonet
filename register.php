@@ -1,13 +1,6 @@
 <?php
-
-    // Параметры для подключения к базе данных
-    $db_host = "localhost"; 
-    $db_name = "typo.net";
-    $db_user = "root";
-    $db_pass = "";
-
-    // Подключаемся к базе данных   
-    $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    require_once('sql.php');
+    require_once('consts.php');
 
     // обработка отправки формы
     if (isset($_POST['submit'])) {
@@ -15,14 +8,24 @@
         $username = $_POST['username'];
         $email = $_POST['email'];
         $password = password_hash($_POST['password'].PASSWD_SALT, PASSWORD_DEFAULT); // хеширование пароля
+        $confirm = $_POST['confirm'];
     
-        // выполнение запроса на добавление нового пользователя в базу данных
-        $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password');";
+        if($password == $confirm)
+        {   
+            echo"Passwords doesn't matches!";
+            exit();
+            // die;
+        }
+        else
+        {
+            // выполнение запроса на добавление нового пользователя в базу данных
+            $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password');"; 
+        }
     
         if (mysqli_query($conn, $sql))
         {
             echo "Новый пользователь успешно добавлен в базу данных";
-            echo "<a href=\"auth.php\">Перейти на страницу авторизации</a>";
+            // echo "<a href=\"login.php\">Перейти на страницу авторизации</a>";
             // перенаправление на страницу авторизации
             header("Location: login.php");
             exit();
@@ -40,7 +43,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>TypoNet</title>
+        <title>Registration</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/reg.css">
         <script src="js/main.js"></script>
@@ -51,7 +54,7 @@
                 <div class="top-menu">
                     <div class="text">
                         <div class="header-text">
-                            <a class="selected" href="#">Главная</a>
+                            <a class="links" href="index.html">Главная</a>
                         <!-- <a href="poly.html"> -->
                             <div class="dropdown">
                                 <span class="links">Копи-центр</span>
@@ -75,7 +78,7 @@
                         <a href="about.html" class="links">О нас</a>
                         <a href="contacts.html" class="links">Контакты</a>
                         <div class="dropdown">
-                            <span class="links">Login</span>
+                            <span class="selected">Login</span>
                             <div class="dropdown-content">
                                 <a class="link1" href="register.php">Register</a>
                                 <a class="link1" href="login.php">Log in</a>
@@ -98,7 +101,8 @@
                     <br>
                     <label for="email">Enter your E-Mail</label>
                     <input type="email" name="email" id="email">
-                    <button type="submit">Submit</button>
+                    <br>
+                    <button type="submit" name="submit">Submit</button>
                 </form>
             </main>
             <footer>

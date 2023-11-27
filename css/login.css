@@ -1,0 +1,16 @@
+.login
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+#username
+{
+    padding: 12px 20px;
+    border: 1px solid;
+    border-radius: 4px;
+}
