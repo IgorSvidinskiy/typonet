@@ -77,11 +77,15 @@
             </header>
             <main>
                 <form action="" method="post" class="login">
-                    <label for="username">Enter a username</label>
+                    <label for="username" style="font-family: Gilroy;">Enter a username</label>
                     <input type="text" name="username" id="username">
                     <br>
-                    <label for="password">Enter a password</label>
-                    <input type="password" name="password" id="paswword">
+                    <label for="password" style="font-family: Gilroy;">Enter a password</label>
+                    <input type="password" name="password" id="password">
+                    <br>
+                    <label for="rem-me">Remember me
+                        <input type="checkbox" name="rem-me" id="rememberMe">
+                    </label>
                     <br>
                     <button type="submit" name="submit">Log In</button>
                 </form>
