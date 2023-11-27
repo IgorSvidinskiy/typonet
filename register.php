@@ -9,59 +9,30 @@
     // Подключаемся к базе данных   
     $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
-    // Проверяем, успешно ли подключились
-    if($conn->connect_error) {
-    die("Ошибка подключения к базе данных: " . $conn->connect_error);
-    }
-
-
-    // Функция для регистрации пользователя
-    function register_user($username, $email, $password, $password_confirm)
-    {
-        $name = $username;
-
-        global $conn;
-
-        // Экранируем введенные данные
-        // $username = $conn->real_escape_string($username);
-        // $email = $conn->real_escape_string($email);
-        // $password = $conn->real_escape_string($password);
-        // $password_confirm = $conn->real_escape_string($password_confirm);
-    }
-
-    // Обработка формы регистрации
-    if($_SERVER['REQUEST_METHOD'] == 'POST') 
-    {
+    // обработка отправки формы
+    if (isset($_POST['submit'])) {
+        // получение данных из формы регистрации
         $username = $_POST['username'];
-        $email = $_POST['email']; 
-        $password = $_POST['password'];
-        $password_confirm = $_POST['password_confirm'];
-
-        if(register_user($username, $email, $password, $password_confirm)) {
-            echo "Регистрация прошла успешно!"; 
-        } else {
-            echo "Ошибка при регистрации";
+        $email = $_POST['email'];
+        $password = password_hash($_POST['password'].PASSWD_SALT, PASSWORD_DEFAULT); // хеширование пароля
+    
+        // выполнение запроса на добавление нового пользователя в базу данных
+        $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password');";
+    
+        if (mysqli_query($conn, $sql))
+        {
+            echo "Новый пользователь успешно добавлен в базу данных";
+            echo "<a href=\"auth.php\">Перейти на страницу авторизации</a>";
+            // перенаправление на страницу авторизации
+            header("Location: login.php");
+            exit();
         }
-        // Проверяем, совпадают ли пароли 
-        if($password != $password_confirm) { die("Пароли не совпадают"); }
-
-        // Хешируем пароль перед добавлением в БД
-        $password_hash = sha1($password);
-        
-        // Проверяем, не занят ли email
-        $sql = "SELECT * FROM users WHERE E-Mail='$email'";
-        $result = $conn->query($sql);
-        
-        if($result->num_rows > 0) {
-            die("Пользователь с таким email уже зарегистрирован");
+        else { echo "Ошибка: " . $sql . "<br>" . mysqli_error($conn); }
         }
-        
-        // Добавляем пользователя в базу данных 
-        $sql = "INSERT INTO users (name, E-Mail, password)
-            VALUES ('$name', '$email', '$password_hash')";
-                
-        if($conn->query($sql)) { return true; } else { return false; }
-    }
+    
+        // закрытие соединения с базой данных
+        mysqli_close($conn);
+    
 ?>
 
 <!DOCTYPE html>
@@ -125,7 +96,7 @@
                     <label for="confirm">Confirm your password</label>
                     <input type="password" name="confirm" id="password_confirm">
                     <br>
-                    <label for="email">Enter tour E-Mail</label>
+                    <label for="email">Enter your E-Mail</label>
                     <input type="email" name="email" id="email">
                     <button type="submit">Submit</button>
                 </form>
