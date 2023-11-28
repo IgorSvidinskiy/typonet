@@ -1,29 +1,37 @@
 <?php
     require_once('sql.php');
-    require_once('consts.php');
 
-    // обработка отправки формы
-    if (isset($_POST['submit'])) {
-        // получение данных из формы регистрации
+
+    // Обработка отправки формы
+    if (($_SERVER['REQUEST_METHOD'] === 'POST') &&(isset($_POST['username'])&&(isset($_POST['password']))))
+    {
+
+        // Получение данных из формы
         $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'].PASSWD_SALT, PASSWORD_DEFAULT); // хеширование пароля
+        $password = $_POST['password'];
 
-        // выполнение запроса на добавление нового пользователя в базу данных
-        $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password');";
-
-        if (mysqli_query($conn, $sql)){
-            echo "Новый пользователь успешно добавлен в базу данных";
-            echo "<a href=\"auth.php\">Перейти на страницу авторизации</a>";
-            // перенаправление на страницу авторизации
-            //header("Location: auth.php");
-            exit();
-        } else {
-            echo "Ошибка: " . $sql . "<br>" . mysqli_error($conn);
+        //$sql = "SELECT * FROM `users1`;";
+        // Поиск пользователя в базе данных
+        $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+        
+        if (mysqli_num_rows($result) > 0) 
+        {
+            $row = mysqli_fetch_assoc($result);
+            // Проверка правильности пароля
+            if (password_verify($password.PASSWD_SALT, $row['password'])) 
+            {
+                echo "Авторизация успешна";
+                header("Location: index.html");
+                // echo "&nbsp;&nbsp;&nbsp;<a href=\"index2.php\">Перейти на главную страницу</a>";
+            } 
+            else { echo "Неправильное имя пользователя или пароль"; }
+        }
+        if(isset($_POST['rem-me']))
+        {
+            setcookie('email', $email, time() + 60 * 60 * 24 * 30);  
+            setcookie('password', $password_hash, time() + 60 * 60 * 24 * 30);
         }
     }
-    // закрытие соединения с базой данных
-    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +41,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/login.css">
+        <script src="js/main.js"></script>
         <title>Log-In</title>
     </head>
     <body>
