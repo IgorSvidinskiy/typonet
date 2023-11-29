@@ -20,17 +20,13 @@
             // Проверка правильности пароля
             if (password_verify($password.PASSWD_SALT, $row['password'])) 
             {
-                echo "Авторизация успешна";
+                // echo "Авторизация успешна";wwwwwwwww``````````
                 header("Location: index.html");
                 // echo "&nbsp;&nbsp;&nbsp;<a href=\"index2.php\">Перейти на главную страницу</a>";
             } 
             else { echo "Неправильное имя пользователя или пароль"; }
         }
-        if(isset($_POST['rem-me']))
-        {
-            setcookie('email', $email, time() + 60 * 60 * 24 * 30);  
-            setcookie('password', $password_hash, time() + 60 * 60 * 24 * 30);
-        }
+
     }
 ?>
 
